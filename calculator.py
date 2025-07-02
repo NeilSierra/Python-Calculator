@@ -146,11 +146,26 @@ class Calculator(QMainWindow):
 
     def on_equal(self):
         equation = self.equationLabel.text()
-        result = eval(equation)
-        self.resultLabel.setText(f"= {result}")
+
+        try:
+            result = eval(equation)
+        except SyntaxError:
+            self.resultLabel.setText("SyntaxError")
+        except ZeroDivisionError:
+            self.resultLabel.setText("ZeroDivisionError")
+        else:
+            self.resultLabel.setText(f"= {result}")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
     calculator = Calculator()
     calculator.show()
+
+    frameGeometry = calculator.frameGeometry()
+    screen = app.primaryScreen()
+    center = screen.availableGeometry().center()
+    frameGeometry.moveCenter(center)
+    calculator.move(frameGeometry.topLeft())
+
     sys.exit(app.exec_())
