@@ -36,7 +36,6 @@ class Calculator(QMainWindow):
     def initUI(self):
         self.setGeometry(0, 0, 500, 750)
         self.setWindowTitle("Basic Calculator")
-        self.setWindowIcon(QIcon("icon.ico"))
 
         centralWidget = QWidget()
         self.setCentralWidget(centralWidget)
@@ -158,6 +157,7 @@ class Calculator(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("icon.ico"))
 
     calculator = Calculator()
     calculator.show()
