@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import (QMainWindow, QApplication, QWidget, QPushButton, QLabel, QFrame,
                              QVBoxLayout, QGridLayout, QSizePolicy)
 from PyQt5.QtCore import Qt
@@ -155,9 +155,18 @@ class Calculator(QMainWindow):
         else:
             self.resultLabel.setText(f"= {result}")
 
+
+def resource_path(relative_path):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+
 if __name__ == "__main__":
+    icon_path = resource_path("icon.ico")
+
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.ico"))
+    app.setWindowIcon(QIcon(icon_path))
 
     calculator = Calculator()
     calculator.show()
